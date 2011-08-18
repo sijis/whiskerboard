@@ -1,5 +1,6 @@
-from unipath import FSPath as Path
-PROJECT_DIR = Path(__file__).absolute().ancestor(2)
+import os
+
+PROJECT_PATH = os.path.abspath(os.path.split(__file__)[0] + "/..")
 
 ######################################
 # Main
@@ -39,8 +40,9 @@ MIDDLEWARE_CLASSES = (
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'whiskerboard',
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'whiskerboard.sqlite3',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -91,13 +93,13 @@ LOGGING = {
 # Media/Static
 ######################################
 
-MEDIA_ROOT = PROJECT_DIR.parent.child('data')
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'data')
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = PROJECT_DIR.child('static_root')
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static_root')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    str(PROJECT_DIR.child('static')),
+    str(os.path.join(PROJECT_PATH, 'static')),
 )
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
@@ -121,7 +123,7 @@ TEMPLATE_LOADERS = (
 )
 
 TEMPLATE_DIRS = (
-    PROJECT_DIR.child('templates'),
+    os.path.join(PROJECT_PATH, 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
