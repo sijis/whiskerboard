@@ -29,7 +29,7 @@ class Service(models.Model):
         yesterday = date.today() - timedelta(days=1)
         ago = yesterday - timedelta(days=5)
         
-        events = self.events.filter(start__gt=ago, start__lt=yesterday)
+        events = self.events.filter(start__gt=ago, start__lt=date.today())
         
         stats = {}
         
