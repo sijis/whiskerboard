@@ -1,5 +1,13 @@
 from django.contrib import admin
-from board.models import Service, Status, Event
+from board.models import Category, Service, Status, Event
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    prepopulated_fields = {'slug': ('name',)}
+
+admin.site.register(Category, CategoryAdmin)
+
 
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('name', 'description')

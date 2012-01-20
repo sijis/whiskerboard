@@ -2,8 +2,12 @@
 
 {% block content %}
 
+{% regroup services by category as category_list %}
+
       <div id="webservices" class="frame">
-        
+
+	{% for category in category_list %}
+	<h2 class="category">{{ category.grouper }}</h2>
           <table id="service-list">
             <thead>
               <tr>
@@ -17,7 +21,7 @@
             </thead>
 
             <tbody id="services-body">
-              {% for service in services %}
+              {% for service in category.list %}
                 <tr>
                   <td>
                     <a href="{{ service.get_absolute_url }}">
@@ -48,7 +52,8 @@
               
             </tbody>
           </table>
-        
+
+        {% endfor %}
         {% include "board/_legend.html" %}
         
       </div>
