@@ -7,7 +7,12 @@
       <div id="webservices" class="frame">
 
 	{% for category in category_list %}
-	<h2 class="category">{{ category.grouper }}</h2>
+
+	<h2 class="category">{{ category.grouper.name }}</h2>
+	<div class="category-desc">
+	  {{ category.grouper.description|safe }}
+	</div>
+
           <table id="service-list">
             <thead>
               <tr>
