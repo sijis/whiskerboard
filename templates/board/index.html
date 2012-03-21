@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% regroup services by category as category_list %}
+{% regroup services|dictsort:"category.name" by category as category_list %}
 
       <div id="webservices" class="frame">
 
