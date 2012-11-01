@@ -24,6 +24,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'board',
+    'tastypie',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,8 +55,8 @@ DATABASES = {
 # Localisation
 ######################################
 
-TIME_ZONE = 'Europe/London'
-LANGUAGE_CODE = 'en-gb'
+TIME_ZONE = 'America/Chicago'
+LANGUAGE_CODE = 'en-US'
 USE_I18N = True
 USE_L10N = True
 
