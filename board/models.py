@@ -75,7 +75,20 @@ class Service(models.Model):
             
         return results
     
+    def current_event(self):
+        try:
+            t_event = self.events.latest()
+            event = {
+                'service': t_event.service,
+                'status': t_event.status,
+                'message': t_event.message,
+                'start': t_event.start,
+                'informational': t_event.informational,
+            }
+        except:
+            event = None
 
+        return event
 
 class StatusManager(models.Manager):
     def default(self):
