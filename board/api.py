@@ -1,12 +1,17 @@
 from tastypie import fields
 from tastypie.resources import ModelResource
 from board.models import Service, Category, Status, Event
+from tastypie.constants import ALL, ALL_WITH_RELATIONS
 
 class CategoryResource(ModelResource):
     class Meta:
         queryset = Category.objects.all()
         resource_name = 'categories'
         excludes = ['slug', 'id']
+        filtering = {
+            "name": ALL,
+        }
+
 
 class ServiceResource(ModelResource):
     category = fields.ForeignKey(CategoryResource, 'category', full=True)
@@ -15,6 +20,9 @@ class ServiceResource(ModelResource):
         queryset = Service.objects.all()
         resource_name = 'services'
         excludes = ['slug', 'id']
+        filtering = {
+            "name": ALL,
+        }
 
     def dehydrate(self, bundle):
         # showing latest event for the category
@@ -26,6 +34,10 @@ class StatusResource(ModelResource):
         queryset = Status.objects.all()
         resource_name = 'statuses'
         excludes = ['slug', 'id']
+        filtering = {
+            "name": ALL,
+        }
+
 
 class EventsResource(ModelResource):
 
