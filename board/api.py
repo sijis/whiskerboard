@@ -46,7 +46,7 @@ class ServiceResource(ModelResource):
     def dehydrate(self, bundle):
         # showing latest event for the category
         bundle.data['current-event'] = bundle.obj.current_event()
-        return bundle.data
+        return bundle
 
 
 class StatusResource(ModelResource):
