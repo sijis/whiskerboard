@@ -21,3 +21,10 @@ You might need to install [pip](http://www.pip-installer.org/en/latest/installin
 
 Back on the admin home page, click on "services" and add the things you want to report the status of (website, API etc). To change the status of a service add an event for it.
 
+API Documentation
+-----------------
+
+Visit the [wiki](http://github.com/sijis/whiskerboard/wiki) page on details about the API.
+
+You may also find useful the [whiskerboard-tools](http://github.com/sijis/whiskerboard-tools) repository.
+
