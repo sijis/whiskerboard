@@ -98,11 +98,10 @@ MEDIA_ROOT = os.path.join(PROJECT_PATH, 'data')
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(PROJECT_PATH, 'static_root')
-STATIC_URL = '/static/'
+STATIC_URL = '/static/admin/'
 STATICFILES_DIRS = (
     str(os.path.join(PROJECT_PATH, 'static')),
 )
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 # List of finder classes that know how to find static files in
 # various locations.
