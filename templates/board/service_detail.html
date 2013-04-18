@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody id="events-tbody">
-            {% for e in service.events.all %}
+            {% for e in events %}
               <tr>
                 <td>{{ e.start|date:"N j, fA T" }}</td>
                 <td class="status highlight">
