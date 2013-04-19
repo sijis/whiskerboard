@@ -29,7 +29,7 @@
             {% for service in category.list %}
                 <tr>
                   <td>
-                    <a href="{{ service.get_absolute_url }}">{{ service.name }}</a>
+                    <a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/j" }}">{{ service.name }}</a>
                   </td>
                   
                   <td class="status highlight">
