@@ -37,6 +37,12 @@
                 <td>{{ e.message|safe }}</td>
               </tr>
             {% endfor %}
+            {% if no_events %}
+              <tr>
+                <td colspan="3"><h1>{{ no_events }}</h1></td>
+                </td>
+              </tr>
+            {% endif %}
           </tbody>
         </table>
       </div>

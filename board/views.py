@@ -65,8 +65,13 @@ class ServiceView(BoardMixin, DetailView):
 
         events = data.events.filter(start__gte=start_date).filter(start__lt=end_date)
 
+        no_events = None
+        if len(events) == 0:
+            no_events = 'No events found.'
+
         return render_to_response(self.template_name, {
             'service': data,
             'events': events,
+            'no_events': no_events,
         }, context_instance=RequestContext(request))
 
