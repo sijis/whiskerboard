@@ -4,7 +4,7 @@
 
 {% regroup services|dictsort:"category.name" by category as category_list %}
 
-      <div id="webservices" class="frame">
+    <div id="webservices" class="frame">
 
 	{% for category in category_list %}
 
@@ -26,42 +26,41 @@
             </thead>
 
             <tbody id="services-body">
-              {% for service in category.list %}
+            {% for service in category.list %}
                 <tr>
                   <td>
-                    <a href="{{ service.get_absolute_url }}">
-                      {{ service.name }} </a>
+                    <a href="{{ service.get_absolute_url }}">{{ service.name }}</a>
                   </td>
                   
                   <td class="status highlight">
-		    <a href="{{ service.get_absolute_url }}">
-          {% with service.events.latest.status as latest_status %}{% if latest_status %}
-          <img src="{{ STATIC_URL }}images/status/{{ latest_status.image }}.png"
-                      alt="{{ latest_status }}"/>
-		    {% else %}
-          <img src="{{ STATIC_URL }}images/status/{{ default.image }}.png"
-                      alt="{{ default.name }}"/>
-        {% endif %}{% endwith %}
-		    </a>
+                    <a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/j" }}">
+                    {% with service.events.latest.status as latest_status %}
+                    {% if latest_status %}
+                        <img src="{{ STATIC_URL }}images/status/{{ latest_status.image }}.png" alt="{{ latest_status }} "/>
+                    {% else %}
+                        <img src="{{ STATIC_URL }}images/status/{{ default.image }}.png" alt="{{ default.name }} "/>
+                    {% endif %}
+                    {% endwith %}
+                    </a>
                   </td>
                   
                   {% for status in service.last_five_days %}
                     <td class="status">
-                      <img src="{{ STATIC_URL }}images/status/{{ status.image }}.png" alt="{{ status.image }}">
+                        <a href="{{ service.get_absolute_url }}/{{ status.day|date:"Y/m/j" }}">
+                            <img src="{{ STATIC_URL }}images/status/{{ status.image }}.png" alt="{{ status.image }}">
+                        </a>
                     </td>
                   {% endfor %}
-                      
                 </tr>
-                
-              {% endfor %}
+            {% endfor %}
               
             </tbody>
           </table>
 
-        {% endfor %}
-        {% include "board/_legend.html" %}
+    {% endfor %}
+    {% include "board/_legend.html" %}
         
-      </div>
+    </div>
       
 {% endblock %}
 
