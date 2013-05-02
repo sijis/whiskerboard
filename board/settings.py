@@ -1,16 +1,16 @@
 import os
 
-PROJECT_PATH = os.path.abspath(os.path.split(__file__)[0] + "/..")
+PROJECT_ROOT = os.path.dirname(__file__)
 
 ######################################
 # Main
 ######################################
 
 DEBUG = True
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'board.urls'
 SITE_ID = 1
 
-SECRET_KEY = "zr=$!5*e#&%9ufb%7a9ztjr@2pu^w$&o+3!nhm*_9x_=4*wx0t"
+SECRET_KEY = "zr=$!5*e#&%9ufb%7a9ztjr@2pu^w$&o+3!nhm*_9x_=4*wx0t" # Missing by Default. Add your own unique key.
 
 ######################################
 # Apps
@@ -102,13 +102,13 @@ LOGGING = {
 # Media/Static
 ######################################
 
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'data')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = ''
+MEDIA_URL = ''
 
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static_root')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'collected_static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    str(os.path.join(PROJECT_PATH, 'static')),
+    os.path.join(PROJECT_ROOT, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -116,7 +116,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 ######################################
@@ -131,7 +131,7 @@ TEMPLATE_LOADERS = (
 )
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'templates'),
+    os.path.join(PROJECT_ROOT, 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

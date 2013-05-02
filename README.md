@@ -12,7 +12,7 @@ Quick start guide
     $ git clone git@github.com:sijis/whiskerboard.git
     $ cd whiskerboard
     $ sudo pip install -r requirements.txt
-    $ echo "SECRET_KEY = 'EnterABunchOfRandomCharactersHere'" > settings/local.py
+    $ Add a "SECRET_KEY = 'EnterABunchOfRandomCharactersHere'" to settings/base.py
         (Alternatively, use http://www.miniwebtool.com/django-secret-key-generator/ to create a secret key!)
     $ ./manage.py syncdb
     $ ./manage.py migrate

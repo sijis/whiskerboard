@@ -43,9 +43,12 @@ class ServiceView(BoardMixin, DetailView):
 
         data = get_object_or_404(self.model, name=slug)
 
-        if year: year = int(year)
-        if month: month = int(month)
-        if day: day = int(day)
+        if year:
+            year = int(year)
+        if month:
+            month = int(month)
+        if day:
+            day = int(day)
 
         if day:
             start_date = datetime.date(year, month, day)
