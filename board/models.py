@@ -35,7 +35,7 @@ class Service(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('service', [self.slug])
+        return 'service', [self.slug]
 
     def last_five_days(self):
         """
