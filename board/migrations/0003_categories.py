@@ -4,6 +4,7 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
@@ -18,17 +19,19 @@ class Migration(SchemaMigration):
         db.send_create_signal('board', ['Category'])
 
         # Adding field 'Service.category'
-        db.add_column('board_service', 'category', self.gf('django.db.models.fields.related.ForeignKey')(related_name='services', null=True, to=orm['board.Category']), keep_default=False)
-
+        db.add_column('board_service',
+                      'category',
+                      self.gf('django.db.models.fields.related.ForeignKey')(related_name='services', null=True,
+                                                                            to=orm['board.Category']),
+                      keep_default=False)
 
     def backwards(self, orm):
-        
+
         # Deleting model 'Category'
         db.delete_table('board_category')
 
         # Deleting field 'Service.category'
         db.delete_column('board_service', 'category_id')
-
 
     models = {
         'board.category': {

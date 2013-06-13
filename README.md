@@ -12,14 +12,15 @@ Quick start guide
     $ git clone git@github.com:sijis/whiskerboard.git
     $ cd whiskerboard
     $ sudo pip install -r requirements.txt
-    $ echo "SECRET_KEY = 'EnterABunchOfRandomCharactersHere'" > settings/local.py
+    $ Add a "SECRET_KEY = 'EnterABunchOfRandomCharactersHere'" to settings/base.py
+        (Alternatively, use http://www.miniwebtool.com/django-secret-key-generator/ to create a secret key!)
     $ ./manage.py syncdb
     $ ./manage.py migrate
     $ ./manage.py runserver
 
 You might need to install [pip](http://www.pip-installer.org/en/latest/installing.html).
-
-Back on the admin home page, click on "services" and add the things you want to report the status of (website, API etc). To change the status of a service add an event for it.
+Back on the admin home page, click on "services" and add the things you want to report the status of (website, API etc).
+To change the status of a service add an event for it.
 
 API Documentation
 -----------------

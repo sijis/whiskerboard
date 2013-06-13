@@ -20,7 +20,7 @@
                 <th class="today">Current</th>
               
                 {% for day in past %}
-                  <th class="date">{{ day|date:"N j" }}</th>
+                  <th class="date">{{ day|date:"N d" }}</th>
                 {% endfor %}
 
             </thead>
@@ -29,11 +29,11 @@
             {% for service in category.list %}
                 <tr>
                   <td>
-                    <a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/j" }}">{{ service.name }}</a>
+                    <a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/d" }}">{{ service.name }}</a>
                   </td>
                   
                   <td class="status highlight">
-                    <a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/j" }}">
+                    <a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/d" }}">
                     {% with service.events.latest.status as latest_status %}
                     {% if latest_status %}
                         <img src="{{ STATIC_URL }}images/status/{{ latest_status.image }}.png" alt="{{ latest_status }} "/>
@@ -46,7 +46,7 @@
                   
                   {% for status in service.last_five_days %}
                     <td class="status">
-                        <a href="{{ service.get_absolute_url }}/{{ status.day|date:"Y/m/j" }}">
+                        <a href="{{ service.get_absolute_url }}/{{ status.day|date:"Y/m/d" }}">
                             <img src="{{ STATIC_URL }}images/status/{{ status.image }}.png" alt="{{ status.image }}">
                         </a>
                     </td>

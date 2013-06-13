@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 import calendar
 
+
 class BoardMixin(object):
     def get_context_data(self, **kwargs):
         context = super(BoardMixin, self).get_context_data(**kwargs)
@@ -42,9 +43,12 @@ class ServiceView(BoardMixin, DetailView):
 
         data = get_object_or_404(self.model, name=slug)
 
-        if year: year = int(year)
-        if month: month = int(month)
-        if day: day = int(day)
+        if year:
+            year = int(year)
+        if month:
+            month = int(month)
+        if day:
+            day = int(day)
 
         if day:
             start_date = datetime.date(year, month, day)
