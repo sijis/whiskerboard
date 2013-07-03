@@ -50,9 +50,9 @@ class Service(models.Model):
         events = self.events.select_related().filter(start__gt=ago, start__lt=date.today())
         
         stats = {}
-        
-        for i in range(5):
-            stats[yesterday.day] = {
+
+        while yesterday > ago:
+            stats["%s-%s" % (yesterday.month,yesterday.day)] = {
                 "image": lowest.image,
                 "day": yesterday,
             }
@@ -72,8 +72,8 @@ class Service(models.Model):
 
         for k in keys:
             results.append(stats[k])
-            
-        return results
+
+        return results        
     
     def current_event(self):
         try:
