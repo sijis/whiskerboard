@@ -37,6 +37,19 @@ class Service(models.Model):
     def get_absolute_url(self):
         return 'service', [self.slug]
 
+    def last_known_event(self, event_date, counter=0):
+	print event_date
+        temp = Event.objects.filter(service=self, start__year=event_date.year, start__month=event_date.month, start__day=event_date.day)
+	if temp:
+  	   temp = temp.order_by('id')[0]
+        else:
+           counter += counter + 1
+           if counter > 31:
+               temp = None
+           else:
+               temp = self.last_known_event(event_date - timedelta(days=1), counter)
+        return temp
+
     def last_five_days(self):
         """
         Used on home page.
@@ -48,16 +61,19 @@ class Service(models.Model):
         ago = yesterday - timedelta(days=5)
         
         events = self.events.select_related().filter(start__gt=ago, start__lt=date.today())
-        
         stats = {}
 
         while yesterday > ago:
+            temp = self.last_known_event(yesterday)
+	    if temp:
+	        image = temp.status.image
+	    else:
+                image = lowest.image
             stats["%s-%s" % (yesterday.month,yesterday.day)] = {
-                "image": lowest.image,
+                "image": image,
                 "day": yesterday,
             }
             yesterday = yesterday - timedelta(days=1)
-        
         for event in events:
             if event.status.severity > severity:
                 if event.start.day in stats:
@@ -87,7 +103,6 @@ class Service(models.Model):
             }
         except:
             event = None
-
         return event
 
 class StatusManager(models.Manager):
@@ -130,5 +145,3 @@ class Event(models.Model):
     class Meta:
         ordering = ('-start',)
         get_latest_by = 'start'
-
-
