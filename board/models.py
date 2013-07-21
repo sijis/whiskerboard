@@ -38,16 +38,15 @@ class Service(models.Model):
         return 'service', [self.slug]
 
     def last_known_event(self, event_date, counter=0):
-	print event_date
         temp = Event.objects.filter(service=self, start__year=event_date.year, start__month=event_date.month, start__day=event_date.day)
-	if temp:
-  	   temp = temp.order_by('id')[0]
+        if temp:
+            temp = temp.order_by('id')[0]
         else:
-           counter += counter + 1
-           if counter > 31:
-               temp = None
-           else:
-               temp = self.last_known_event(event_date - timedelta(days=1), counter)
+            counter += counter + 1
+            if counter > 31:
+                temp = None
+            else:
+                temp = self.last_known_event(event_date - timedelta(days=1), counter)
         return temp
 
     def last_five_days(self):
@@ -65,9 +64,9 @@ class Service(models.Model):
 
         while yesterday > ago:
             temp = self.last_known_event(yesterday)
-	    if temp:
-	        image = temp.status.image
-	    else:
+            if temp:
+                image = temp.status.image
+            else:
                 image = lowest.image
             stats["%s-%s" % (yesterday.month,yesterday.day)] = {
                 "image": image,
