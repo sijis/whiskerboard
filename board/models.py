@@ -40,7 +40,7 @@ class Service(models.Model):
     def last_known_event(self, event_date, counter=0):
         temp = Event.objects.filter(service=self, start__year=event_date.year, start__month=event_date.month, start__day=event_date.day)
         if temp:
-            temp = temp.order_by('id')[0]
+            temp = temp.order_by('-id')[0]
         else:
             counter += counter + 1
             if counter > 31:
