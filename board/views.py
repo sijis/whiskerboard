@@ -16,10 +16,10 @@ class BoardMixin(object):
 def get_past_days(num):
     date = datetime.date.today()
     dates = []
-    
-    for i in range(1, num+1):
+
+    for i in range(1, num + 1):
         dates.append(date - datetime.timedelta(days=i))
-    
+
     return dates
 
 
@@ -65,7 +65,7 @@ class ServiceView(BoardMixin, DetailView):
         else:
             # get last 30 days
             start_date = datetime.datetime.now() + datetime.timedelta(days=30)
-            end_date = datetime.datetime.now() 
+            end_date = datetime.datetime.now()
 
         events = data.events.filter(start__gte=start_date).filter(start__lt=end_date)
 
@@ -78,4 +78,3 @@ class ServiceView(BoardMixin, DetailView):
             'events': events,
             'no_events': no_events,
         }, context_instance=RequestContext(request))
-

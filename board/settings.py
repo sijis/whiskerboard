@@ -10,7 +10,8 @@ DEBUG = True
 ROOT_URLCONF = 'board.urls'
 SITE_ID = 1
 
-SECRET_KEY = "zr=$!5*e#&%9ufb%7a9ztjr@2pu^w$&o+3!nhm*_9x_=4*wx0t" # Missing by Default. Add your own unique key.
+# Missing by Default. Add your own unique key.
+SECRET_KEY = "zr=$!5*e#&%9ufb%7a9ztjr@2pu^w$&o+3!nhm*_9x_=4*wx0t"
 
 ######################################
 # Apps
@@ -143,4 +144,3 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'board.context_processors.current_site',
 )
-

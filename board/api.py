@@ -16,7 +16,8 @@ class SimpleAuthentication(BasicAuthentication):
     def is_authenticated(self, request, **kwargs):
         if request.method == 'GET':
             return True
-        return super(SimpleAuthentication, self).is_authenticated(request, **kwargs)
+        return super(SimpleAuthentication, self).is_authenticated(request,
+                                                                  **kwargs)
 
 
 class CategoryResource(ModelResource):
@@ -73,4 +74,3 @@ class EventsResource(ModelResource):
         excludes = ['id']
         authentication = SimpleAuthentication()
         authorization = DjangoAuthorization()
-

@@ -13,7 +13,7 @@ class Category(models.Model):
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'categories'
-    
+
     def __unicode__(self):
         return self.name
 
@@ -29,16 +29,19 @@ class Service(models.Model):
 
     class Meta:
         ordering = ('name',)
-    
+
     def __unicode__(self):
         return self.name
-    
+
     @models.permalink
     def get_absolute_url(self):
         return 'service', [self.slug]
 
     def last_known_event(self, event_date, counter=0):
-        temp = Event.objects.filter(service=self, start__year=event_date.year, start__month=event_date.month, start__day=event_date.day)
+        temp = Event.objects.filter(service=self,
+                                    start__year=event_date.year,
+                                    start__month=event_date.month,
+                                    start__day=event_date.day)
         if temp:
             temp = temp.order_by('-id')[0]
         else:
@@ -46,7 +49,8 @@ class Service(models.Model):
             if counter > 31:
                 temp = None
             else:
-                temp = self.last_known_event(event_date - timedelta(days=1), counter)
+                temp = self.last_known_event(event_date - timedelta(days=1),
+                                             counter)
         return temp
 
     def last_five_days(self):
@@ -55,11 +59,12 @@ class Service(models.Model):
         """
         lowest = Status.objects.default()
         severity = lowest.severity
-        
+
         yesterday = date.today() - timedelta(days=1)
         ago = yesterday - timedelta(days=5)
-        
-        events = self.events.select_related().filter(start__gt=ago, start__lt=date.today())
+
+        events = self.events.select_related().filter(start__gt=ago,
+                                                     start__lt=date.today())
         stats = {}
 
         while yesterday > ago:
@@ -68,7 +73,7 @@ class Service(models.Model):
                 image = temp.status.image
             else:
                 image = lowest.image
-            stats["%s-%s" % (yesterday.month,yesterday.day)] = {
+            stats["%s-%s" % (yesterday.month, yesterday.day)] = {
                 "image": image,
                 "day": yesterday,
             }
@@ -88,8 +93,8 @@ class Service(models.Model):
         for k in keys:
             results.append(stats[k])
 
-        return results        
-    
+        return results
+
     def current_event(self):
         try:
             t_event = self.events.latest()
@@ -104,9 +109,11 @@ class Service(models.Model):
             event = None
         return event
 
+
 class StatusManager(models.Manager):
     def default(self):
         return self.get_query_set().filter(severity=10)[0]
+
 
 class Status(models.Model):
     """

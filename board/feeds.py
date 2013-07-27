@@ -8,7 +8,7 @@ class EventFeed(Feed):
     description = "Latest status updates."
     link = '/'
     feed_type = Atom1Feed
-    
+
     def title(self):
         return Site.objects.get_current().name
 
@@ -27,5 +27,3 @@ class EventFeed(Feed):
 
     def item_link(self, item):
         return item.service.get_absolute_url()
-
-

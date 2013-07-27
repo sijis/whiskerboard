@@ -28,6 +28,3 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = ('service', 'status')
 
 admin.site.register(Event, EventAdmin)
-
-
-
