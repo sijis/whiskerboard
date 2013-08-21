@@ -78,11 +78,13 @@ class Service(models.Model):
                 "day": yesterday,
             }
             yesterday = yesterday - timedelta(days=1)
+
         for event in events:
             if event.status.severity > severity:
-                if event.start.day in stats:
-                    stats[event.start.day]["image"] = "information"
-                    stats[event.start.day]["information"] = True
+                issue_date = '%s-%s' % (event.start.month, event.start.day)
+                if issue_date in stats.keys():
+                    stats[issue_date]["image"] = "information"
+                    stats[issue_date]["information"] = True
 
         results = []
 
