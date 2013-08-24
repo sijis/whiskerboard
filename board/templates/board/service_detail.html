@@ -1,51 +1,43 @@
 {% extends "base.html" %}
 {% block title %}{{ service.name }} | {{ block.super }}{% endblock %}
-
 {% block content %}
-        
-      <div id="webservices" class="frame">
-        
-        <h2>{{ service.name }}</h2>
+<div id="webservices" class="frame">
+  <h2>{{ service.name }}</h2>
+  <p id="service-desc">{{ service.description|safe }}</p>
+  <h3 class="date-range">
+    {% if start_date %}
+      {{ start_date|date:"n/j/Y"  }}
+    {% endif %}
+  </h3>
 
-	<p id="serviceDescription">{{ service.description|safe }}</p>
-        
-        <h3 class="date-range">
-          {% if start_date %}
-            {{ start_date|date:"n/j/Y"  }}
+  <table class="event-log" cellpadding="10">
+    <thead>
+      <tr>
+        <th class="time-header">Time</th>
+        <th class="status-header">Status</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody id="events-tbody">
+      {% for e in events %}
+      <tr>
+        <td>{{ e.start|date:"N j, fA T" }}</td>
+        <td class="status highlight">
+          {% if e.informational %}
+            <img src="{{ STATIC_URL }}images/status/information.png" alt="Information">
+          {% else %}
+            <img src="{{ STATIC_URL }}images/status/{{ e.status.image }}.png" alt="{{ e.status.name }}">
           {% endif %}
-        </h3>
-        
-        <table class="event-log" cellpadding="10">
-          <thead>
-            <tr>
-              <th class="time-header">Time</th>
-              <th class="status-header">Status</th>
-              <th>Message</th>
-            </tr>
-          </thead>
-          <tbody id="events-tbody">
-            {% for e in events %}
-              <tr>
-                <td>{{ e.start|date:"N j, fA T" }}</td>
-                <td class="status highlight">
-                  {% if e.informational %}
-                    <img src="{{ STATIC_URL }}images/status/information.png" alt="Information">
-                  {% else %}
-                    <img src="{{ STATIC_URL }}images/status/{{ e.status.image }}.png" alt="{{ e.status.name }}">
-                  {% endif %}
-                </td>
-                <td>{{ e.message|safe }}</td>
-              </tr>
-            {% endfor %}
-            {% if no_events %}
-              <tr>
-                <td colspan="3"><h1>{{ no_events }}</h1></td>
-                </td>
-              </tr>
-            {% endif %}
-          </tbody>
-        </table>
-      </div>
-      
+        </td>
+        <td>{{ e.message|safe }}</td>
+      </tr>
+      {% endfor %}
+      {% if no_events %}
+      <tr>
+        <td colspan="3"><h1>{{ no_events }}</h1></td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
-

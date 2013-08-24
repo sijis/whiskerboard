@@ -1,66 +1,51 @@
 {% extends "base.html" %}
-
 {% block content %}
-
 {% regroup services|dictsort:"category.name" by category as category_list %}
+<div id="webservices" class="frame">
+  {% for category in category_list %}
+  <h2 class="category">{{ category.grouper.name }}</h2>
+  <div class="category-desc">
+    {{ category.grouper.description|safe }}
+  </div>
+  <table id="service-list">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th class="today">Current</th>
+        {% for day in past %}
+          <th class="date">{{ day|date:"N d" }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
 
-    <div id="webservices" class="frame">
+    <tbody id="services-body">
+    {% for service in category.list %}
+      <tr>
+        <td><a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/d" }}">{{ service.name }}</a></td>
+        <td class="status highlight">
+          <a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/d" }}">
+            {% with service.events.latest.status as latest_status %}
+            {% if latest_status %}
+              <img src="{{ STATIC_URL }}images/status/{{ latest_status.image }}.png" alt="{{ latest_status }} "/>
+            {% else %}
+              <img src="{{ STATIC_URL }}images/status/{{ default.image }}.png" alt="{{ default.name }} "/>
+            {% endif %}
+            {% endwith %}
+          </a>
+        </td>
 
-	{% for category in category_list %}
-
-	<h2 class="category">{{ category.grouper.name }}</h2>
-	<div class="category-desc">
-	  {{ category.grouper.description|safe }}
-	</div>
-
-          <table id="service-list">
-            <thead>
-              <tr>
-                <th>Service</th>
-                <th class="today">Current</th>
-              
-                {% for day in past %}
-                  <th class="date">{{ day|date:"N d" }}</th>
-                {% endfor %}
-
-            </thead>
-
-            <tbody id="services-body">
-            {% for service in category.list %}
-                <tr>
-                  <td>
-                    <a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/d" }}">{{ service.name }}</a>
-                  </td>
-                  
-                  <td class="status highlight">
-                    <a href="{{ service.get_absolute_url }}{{ service.events.latest.start|date:"/Y/m/d" }}">
-                    {% with service.events.latest.status as latest_status %}
-                    {% if latest_status %}
-                        <img src="{{ STATIC_URL }}images/status/{{ latest_status.image }}.png" alt="{{ latest_status }} "/>
-                    {% else %}
-                        <img src="{{ STATIC_URL }}images/status/{{ default.image }}.png" alt="{{ default.name }} "/>
-                    {% endif %}
-                    {% endwith %}
-                    </a>
-                  </td>
-                  
-                  {% for status in service.last_five_days %}
-                    <td class="status">
-                        <a href="{{ service.get_absolute_url }}/{{ status.day|date:"Y/m/d" }}">
-                            <img src="{{ STATIC_URL }}images/status/{{ status.image }}.png" alt="{{ status.image }}">
-                        </a>
-                    </td>
-                  {% endfor %}
-                </tr>
-            {% endfor %}
-              
-            </tbody>
-          </table>
-
-    {% endfor %}
-    {% include "board/_legend.html" %}
-        
-    </div>
-      
+        {% for status in service.last_five_days %}
+        <td class="status">
+          <a href="{{ service.get_absolute_url }}/{{ status.day|date:"Y/m/d" }}">
+            <img src="{{ STATIC_URL }}images/status/{{ status.image }}.png" alt="{{ status.image }}">
+          </a>
+        </td>
+        {% endfor %}
+      </tr>
+    {% endfor %}              
+    </tbody>
+  </table>
+{% endfor %}
+{% include "board/_legend.html" %}
+</div>
 {% endblock %}
-
