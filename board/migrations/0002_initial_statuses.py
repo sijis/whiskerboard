@@ -1,11 +1,11 @@
 # encoding: utf-8
 import datetime
-from south.db import db
-from south.v2 import DataMigration
-from django.db import models
+from django.db import models, migrations
 
 
-class Migration(DataMigration):
+class Migration(migrations.Migration):
+
+    dependencies = [("board", "0001_initial")]
 
     def forwards(self, orm):
         orm.Status.objects.create(
