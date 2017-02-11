@@ -2,7 +2,7 @@ from board.models import Service, Status
 import datetime
 from django.views.generic import ListView, DetailView
 from django.template import RequestContext
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 import calendar
 
 
@@ -73,8 +73,9 @@ class ServiceView(BoardMixin, DetailView):
         if len(events) == 0:
             no_events = 'No events found.'
 
-        return render_to_response(self.template_name, {
+        context = {
             'service': data,
             'events': events,
             'no_events': no_events,
-        }, context_instance=RequestContext(request))
+        }
+        return render(request=request, template_name=self.template_name, context=context)
