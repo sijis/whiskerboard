@@ -1,0 +1,54 @@
+[
+    {
+        "model": "board.category",
+        "pk": 1,
+        "fields": {
+            "name": "Category 1",
+            "slug": "category-1",
+            "description": "Category 1 Description"
+        }
+    },
+    {
+        "model": "board.service",
+        "pk": 1,
+        "fields": {
+            "name": "Services 1",
+            "slug": "services-1",
+            "description": "Services 1 Description",
+            "category": 1
+        }
+    },
+    {
+        "model": "board.status",
+        "pk": 1,
+        "fields": {
+            "name": "Down",
+            "slug": "down",
+            "description": "The service is currently down",
+            "severity": 40,
+            "image": "cross-circle"
+        }
+    },
+    {
+        "model": "board.status",
+        "pk": 2,
+        "fields": {
+            "name": "Up",
+            "slug": "up",
+            "description": "The service is up",
+            "severity": 10,
+            "image": "tick-circle"
+        }
+    },
+    {
+        "model": "board.status",
+        "pk": 3,
+        "fields": {
+            "name": "Warning",
+            "slug": "warning",
+            "description": "The service is experiencing intermittent problems",
+            "severity": 30,
+            "image": "exclamation"
+        }
+    }
+]
