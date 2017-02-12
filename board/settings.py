@@ -12,7 +12,7 @@ SITE_ID = 1
 
 # Missing by Default. Add your own unique key.
 SECRET_KEY = "zr=$!5*e#&%9ufb%7a9ztjr@2pu^w$&o+3!nhm*_9x_=4*wx0t"
-
+TASTYPIE_DEFAULT_FORMATS = ['json']
 ######################################
 # Apps
 ######################################
