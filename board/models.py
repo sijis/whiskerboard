@@ -17,6 +17,9 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 
 class Service(models.Model):
     """
@@ -31,6 +34,9 @@ class Service(models.Model):
         ordering = ('name',)
 
     def __unicode__(self):
+        return self.name
+
+    def __str__(self):
         return self.name
 
     @models.permalink
@@ -141,6 +147,9 @@ class Status(models.Model):
         verbose_name_plural = 'statuses'
 
     def __unicode__(self):
+        return self.name
+
+    def __str__(self):
         return self.name
 
 
