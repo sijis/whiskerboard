@@ -41,7 +41,7 @@ class ServiceView(BoardMixin, DetailView):
 
     def get(self, request, slug=None, year=None, month=None, day=None):
 
-        data = get_object_or_404(self.model, name=slug)
+        data = get_object_or_404(self.model, slug=slug)
 
         if year:
             year = int(year)
