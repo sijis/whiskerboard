@@ -114,7 +114,8 @@ class Service(models.Model):
 
 class StatusManager(models.Manager):
     def default(self):
-        return self.get_query_set().filter(severity=10)[0]
+        results = self.get_queryset().filter(severity=10)[0]
+        return results
 
 
 class Status(models.Model):
