@@ -9,6 +9,8 @@ It is heavily based on [Stashboard](http://www.stashboard.org/). Unlike Stashboa
 Quick start guide
 -----------------
 
+Clone the repo, load sample data and run a server.
+
     $ git clone git@github.com:sijis/whiskerboard.git
     $ cd whiskerboard
     $ sudo pip install -r requirements.txt
@@ -16,10 +18,10 @@ Quick start guide
         (Alternatively, use http://www.miniwebtool.com/django-secret-key-generator/ to create a secret key!)
     $ ./manage.py syncdb
     $ ./manage.py migrate
+    $ ./manage.py loaddata board/migrations/0001_initial_data.json
     $ ./manage.py runserver
 
-You might need to install [pip](http://www.pip-installer.org/en/latest/installing.html).
-Back on the admin home page, click on "services" and add the things you want to report the status of (website, API etc).
+On the admin home page, click on "services" and add the things you want to report the status of (website, API etc).
 To change the status of a service add an event for it.
 
 API Documentation
@@ -27,5 +29,5 @@ API Documentation
 
 Visit the [wiki](http://github.com/sijis/whiskerboard/wiki) page on details about the API.
 
-You may also find useful the [whiskerboard-tools](http://github.com/sijis/whiskerboard-tools) repository.
-
+You may also find useful the [whiskerboard-tools](http://github.com/sijis/whiskerboard-tools) repository for interacting
+with the whiskerboard api.
