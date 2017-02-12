@@ -88,7 +88,7 @@ class Service(models.Model):
 
         results = []
 
-        keys = stats.keys()
+        keys = list(stats.keys())
         keys.sort()
         keys.reverse()
 
